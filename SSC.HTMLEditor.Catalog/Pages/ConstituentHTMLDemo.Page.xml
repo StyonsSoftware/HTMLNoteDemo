@@ -1,0 +1,42 @@
+<PageDefinitionSpec
+  xmlns="bb_appfx_pagedefinition"
+  xmlns:c="bb_appfx_commontypes"
+  ID="a3263313-d025-41c6-8153-fcc7aea9a65c"
+  Name="Constituent HTML Demo Page"
+  Description="A page for displaying information about constituenthtml demo records"
+  Author="Styons Software"
+  >
+  <PageHeader Caption="HTML Demo" ImageKey="CATALOG:SSC.HTMLEditor.Catalog,SSC.HTMLEditor.Catalog.html_32.png"/>
+  <Tabs>
+    <Tab ID="12f80365-fc21-4309-bfe2-3ec9c584b19c" Caption="HTML Demo">
+      <Sections>
+        <Section ID="831edbd2-1322-4c11-9d57-d484f06e2ed8" Caption="Constituent HTML">
+          <DataList ID="f017ee14-c19b-43a2-aaa3-eb9dfeae5d75">
+            <RenderStyle>
+              <StandardView/>
+            </RenderStyle>
+          </DataList>
+          <Actions>
+            <Action ID="57a529b9-9b63-4137-81fd-51291d60245c" Caption="Go to constituent" LinkFieldID="CONSTITUENTNAME">
+              <c:ShowPage PageID="88159265-2b7e-4c7b-82a2-119d01ecd40f">
+                <c:ActionContext>
+                  <c:SectionField>CONSTITUENTID</c:SectionField>
+                </c:ActionContext>
+              </c:ShowPage>
+            </Action>
+            <Action ID="497422d2-6bf8-475b-9d33-f2725c7bd3c9" Caption="Create an HTML note" ImageKey="res:newitem">
+              <c:ShowAddDataForm DataFormID="2eb3ef9c-60c0-43c2-81fb-434b805e26ed"/>
+            </Action>
+            <Action ID="6eb6f2d3-ea0f-4300-b67a-3d6c7ac850a0" Caption="Edit">
+              <c:ShowDataForm DataFormID="a547570f-8e0f-4307-86fe-8ebdc0246123">
+                <c:ActionContext>
+                  <c:SectionField>USR_CONSTITUENTHTMLDEMOID</c:SectionField>
+                </c:ActionContext>
+              </c:ShowDataForm>
+            </Action>
+          </Actions>
+        </Section>
+      </Sections>
+    </Tab>
+  </Tabs>
+</PageDefinitionSpec>

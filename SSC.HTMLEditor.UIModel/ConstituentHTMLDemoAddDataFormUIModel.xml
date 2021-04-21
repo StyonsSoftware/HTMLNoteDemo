@@ -1,0 +1,10 @@
+﻿<UIModelWizardMetadata>
+  <SpecFileName>ConstituentHTMLDemo.Add.xml</SpecFileName>
+  <Namespace></Namespace>
+  <ClassName>ConstituentHTMLDemoAddDataFormUIModel</ClassName>
+  <HtmlInfo GenerateHtml="true">
+    <HtmlFile>ConstituentHTMLDemoAddDataForm.html</HtmlFile>
+    <HtmlFolder>htmlforms\custom\ssc.htmleditor\</HtmlFolder>
+  </HtmlInfo>
+  <GenerateFromDatabase>true</GenerateFromDatabase>
+</UIModelWizardMetadata>

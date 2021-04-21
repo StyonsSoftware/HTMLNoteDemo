@@ -1,0 +1,23 @@
+﻿<TableSpec
+  xmlns="bb_appfx_table"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="e485fe00-84ad-43a1-bf99-4cb8a6064c5b"
+  Name="Constituent HTML Demo"
+  Description="Store HTML related to a constituent for demo purposes"
+  Author="Styons Software"
+  Tablename="USR_CONSTITUENTHTMLDEMO"
+  IsBuiltIn="false"
+  >
+  <Fields>
+    <ForeignKeyField ForeignTable="CONSTITUENT" Name="CONSTITUENTID" ForeignFieldName="ID" OnDelete="CascadeDelete" Required="true" Cardinality="ManyToOne"/>
+    <TextField Name="NOTETITLE" Length="100" Required="true"/>
+    <MemoField Name="HTML" Description="HTML note"/>
+  </Fields>
+  <Indexes>
+    <Index>
+      <IndexFields>
+        <IndexField Name="CONSTITUENTID"/>
+      </IndexFields>
+    </Index>
+  </Indexes>
+</TableSpec>

@@ -1,0 +1,31 @@
+<PackageSpec
+  xmlns="bb_appfx_package"
+  xmlns:c="bb_appfx_commontypes"
+  ID="988f3619-de16-4f4b-97b9-8d2a628bf845"
+  Name="HTML Editor Demo"
+  Description="Demo HTML editors using the Blackbaud SDK"
+  Author="Styons Software"
+  >
+  <DependencyList xmlns="bb_appfx_commontypes">
+    <!--Tables-->
+    <Dependency CatalogAssembly="SSC.HTMLEditor.Catalog.dll" CatalogItem="SSC.HTMLEditor.Catalog.USR_CONSTITUENTHTMLDEMO.Table.xml"/>
+
+    <!--Datalists-->
+    <Dependency CatalogAssembly="SSC.HTMLEditor.Catalog.dll" CatalogItem="SSC.HTMLEditor.Catalog.ConstituentHTMLDemo.Datalist.xml"/>
+    
+    <!--Add forms-->
+    <Dependency CatalogAssembly="SSC.HTMLEditor.Catalog.dll" CatalogItem="SSC.HTMLEditor.Catalog.ConstituentHTMLDemo.Add.xml"/>
+
+    <!--Edit forms-->
+    <Dependency CatalogAssembly="SSC.HTMLEditor.Catalog.dll" CatalogItem="SSC.HTMLEditor.Catalog.ConstituentHTMLDemo.Edit.xml"/>
+
+    <!--Pages-->
+    <Dependency CatalogAssembly="SSC.HTMLEditor.Catalog.dll" CatalogItem="SSC.HTMLEditor.Catalog.ConstituentHTMLDemo.Page.xml"/>
+    
+    <!--Tasks-->
+    <Dependency CatalogAssembly="SSC.HTMLEditor.Catalog.dll" CatalogItem="SSC.HTMLEditor.Catalog.ConstituentHTMLDemo.Task.xml"/>
+
+    <!--Functional Area-->
+    <Dependency CatalogAssembly="SSC.HTMLEditor.Catalog.dll" CatalogItem="SSC.HTMLEditor.Catalog.Training.FunctionalArea.xml"/>
+  </DependencyList>
+</PackageSpec>

@@ -1,0 +1,13 @@
+<TaskSpec
+  xmlns="bb_appfx_task"
+  xmlns:c="bb_appfx_commontypes" 
+  ID="253e0e92-da10-4725-b0d2-926d884ab32a"
+  Name="Show constituent HTML Demo"
+  Description="Show a page that demonstrates HTML editing using the Blackbaud SDK"
+  Author="Styons Software"
+  FunctionalAreaID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Sequence="100"
+  ImageKey="CATALOG:SSC.HTMLEditor.Catalog,SSC.HTMLEditor.Catalog.html_16.png"
+  >
+  <c:ShowPage PageID="a3263313-d025-41c6-8153-fcc7aea9a65c"/>
+</TaskSpec>

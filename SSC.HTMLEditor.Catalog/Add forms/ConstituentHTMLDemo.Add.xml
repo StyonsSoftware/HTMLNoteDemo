@@ -1,0 +1,70 @@
+<AddDataFormTemplateSpec
+  xmlns="bb_appfx_adddataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="7c839ef3-e7b8-467f-bcc3-eadada753d04"
+  Name="ConstituentHTML Demo Add Data Form"
+  Description="A data form for adding constituenthtml demo records"
+  Author="Styons Software"
+  DataFormInstanceID="2eb3ef9c-60c0-43c2-81fb-434b805e26ed"
+  RecordType="Constituent HTML Demo"
+  c:SecurityUIFolder="SSC\Training"
+  FormHeader="Add constituent HTML (demo)"
+  >
+  <SPDataForm>
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_ADD_CONSTITUENTHTMLDEMO">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_DATAFORMTEMPLATE_ADD_CONSTITUENTHTMLDEMO
+(
+  @ID            UNIQUEIDENTIFIER = NULL OUTPUT
+ ,@CHANGEAGENTID UNIQUEIDENTIFIER = NULL
+ ,@CONSTITUENTID UNIQUEIDENTIFIER = ''
+ ,@NOTETITLE     NVARCHAR(100)    = ''
+ ,@TEXT          NVARCHAR(MAX)    = ''
+ ,@HTML          NVARCHAR(MAX)    = ''
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SET @ID = ISNULL(@ID,NEWID())
+  IF @CHANGEAGENTID IS NULL
+    EXEC USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID OUTPUT
+  DECLARE @NOW DATETIME = GETDATE()
+
+  BEGIN TRY
+    INSERT INTO USR_CONSTITUENTHTMLDEMO
+      (ID, CONSTITUENTID, NOTETITLE, HTML, ADDEDBYID, CHANGEDBYID, DATEADDED, DATECHANGED)
+    VALUES
+      (@ID, @CONSTITUENTID, @NOTETITLE, @HTML, @CHANGEAGENTID, @CHANGEAGENTID, @NOW, @NOW)
+  END TRY
+  BEGIN CATCH
+    EXEC USP_RAISE_ERROR
+    RETURN 1
+  END CATCH
+  RETURN 0
+END
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="CONSTITUENTID" Caption="Constituent" DataType="Guid">
+        <SearchList SearchListID="fdf9d631-5277-4300-80b3-fdf5fb8850ec" EnableAutoSearch="true" EnableQuickFind="true"/>
+      </FormField>
+      <FormField FieldID="NOTETITLE" Caption="Title" MaxLength="100"/>
+      <FormField FieldID="TEXT" Hidden="true" Caption="Paste HTML here" Description="The plain text that comprises this design" DefaultValueText=""/>
+      <FormField FieldID="HTML" Caption="Notes" Description="The HTML that comprises this note" DefaultValueText="">
+        <Html PlainTextFieldID="TEXT" AllowClasses="true" AllowConditionalComments="true" AllowImages="true" AllowStyleTags="true" EditorType="Advanced" PasteType="Power"/>
+      </FormField>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="SSC.HTMLEditor.UIModel.dll" ClassName="SSC.HTMLEditor.UIModel.ConstituentHTMLDemoAddDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/ssc.htmleditor/ConstituentHTMLDemoAddDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+</AddDataFormTemplateSpec>

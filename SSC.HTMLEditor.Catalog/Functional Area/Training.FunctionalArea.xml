@@ -1,0 +1,10 @@
+<FunctionalAreaSpec
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  ID="be388753-02ed-4f28-a5af-f855e49b6a76"
+  Name="Training"
+  Description="Contains Training Artifacts"
+  Author="Styons Software"
+  Sequence="9999"
+  xmlns="bb_appfx_functionalarea"
+/>

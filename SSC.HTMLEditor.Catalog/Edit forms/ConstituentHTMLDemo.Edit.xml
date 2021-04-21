@@ -1,0 +1,106 @@
+<EditDataFormTemplateSpec
+  xmlns="bb_appfx_editdataformtemplate"
+  xmlns:c="bb_appfx_commontypes"
+  ID="d9cde805-a0fb-476d-b46d-21c0379490ab"
+  Name="ConstituentHTML Demo Edit Data Form"
+  Description="A data form for editing constituenthtml demo records"
+  Author="Styons Software"
+  DataFormInstanceID="a547570f-8e0f-4307-86fe-8ebdc0246123"
+  RecordType="Constituent HTML Demo"
+  c:SecurityUIFolder="SSC\Training"
+  FormHeader="Edit constituent HTML (demo)"
+  >
+  <SPDataForm>
+    <LoadImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDITLOAD_CONSTITUENTHTMLDEMO">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_DATAFORMTEMPLATE_EDITLOAD_CONSTITUENTHTMLDEMO
+(
+  @ID            UNIQUEIDENTIFIER
+ ,@DATALOADED    BIT              = 0    OUTPUT
+ ,@TSLONG        BIGINT           = 0    OUTPUT
+ ,@CONSTITUENTID UNIQUEIDENTIFIER = NULL OUTPUT
+ ,@NOTETITLE     NVARCHAR(100)    = NULL OUTPUT
+ ,@TEXT          NVARCHAR(MAX)    = NULL OUTPUT
+ ,@HTML          NVARCHAR(MAX)    = NULL OUTPUT
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  SET @DATALOADED = 1
+  SET @TSLONG = 0
+  SELECT
+    @TSLONG        = CD.TSLONG
+   ,@TEXT          = CD.HTML
+   ,@HTML          = CD.HTML
+   ,@NOTETITLE     = CD.NOTETITLE
+   ,@CONSTITUENTID = CD.CONSTITUENTID
+  FROM
+    USR_CONSTITUENTHTMLDEMO CD
+  WHERE CD.ID = @ID
+  RETURN 0
+END
+]]>
+      </c:CreateProcedureSQL>
+    </LoadImplementation>
+
+    <SaveImplementation SPName="USR_USP_DATAFORMTEMPLATE_EDIT_CONSTITUENTHTMLDEMO">
+      <c:CreateProcedureSQL>
+        <![CDATA[
+CREATE PROCEDURE USR_USP_DATAFORMTEMPLATE_EDIT_CONSTITUENTHTMLDEMO 
+(
+  @ID            UNIQUEIDENTIFIER
+ ,@CHANGEAGENTID UNIQUEIDENTIFIER = NULL
+ ,@CONSTITUENTID UNIQUEIDENTIFIER
+ ,@NOTETITLE     NVARCHAR(100)
+ ,@TEXT          NVARCHAR(MAX)
+ ,@HTML          NVARCHAR(MAX)
+)
+AS
+BEGIN
+  SET NOCOUNT ON
+  IF @CHANGEAGENTID IS NULL  
+    EXEC USP_CHANGEAGENT_GETORCREATECHANGEAGENT @CHANGEAGENTID OUTPUT
+  DECLARE @NOW DATETIME = GETDATE()
+
+  BEGIN TRY
+    UPDATE USR_CONSTITUENTHTMLDEMO
+    SET
+      HTML          = @HTML
+     ,NOTETITLE     = @NOTETITLE
+     ,CONSTITUENTID = @CONSTITUENTID
+     ,CHANGEDBYID   = @CHANGEAGENTID
+     ,DATECHANGED   = @NOW
+    WHERE ID = @ID
+  END TRY
+  BEGIN CATCH
+    EXEC USP_RAISE_ERROR
+    RETURN 1
+  END CATCH
+  RETURN 0
+END
+]]>
+      </c:CreateProcedureSQL>
+    </SaveImplementation>
+  </SPDataForm>
+
+  <FormMetaData xmlns="bb_appfx_commontypes">
+    <FormFields>
+      <FormField FieldID="CONSTITUENTID" Caption="Constituent" DataType="Guid">
+        <SearchList SearchListID="fdf9d631-5277-4300-80b3-fdf5fb8850ec" EnableAutoSearch="true" EnableQuickFind="true"/>
+      </FormField>
+      <FormField FieldID="NOTETITLE" Caption="Title" MaxLength="100"/>
+      <FormField FieldID="TEXT" Hidden="true" Caption="Paste HTML here" Description="The plain text that comprises this design" DefaultValueText=""/>
+      <FormField FieldID="HTML" Caption="Notes" Description="The HTML that comprises this note" DefaultValueText="">
+        <Html PlainTextFieldID="TEXT" AllowClasses="true" AllowConditionalComments="true" AllowImages="true" AllowStyleTags="true" EditorType="Advanced" PasteType="Power"/>
+      </FormField>
+    </FormFields>
+
+    <WebUIComponent>
+      <UIModel AssemblyName="SSC.HTMLEditor.UIModel.dll" ClassName="SSC.HTMLEditor.UIModel.ConstituentHTMLDemoEditDataFormUIModel"/>
+      <WebUI>
+        <ExternalResource Url="browser/htmlforms/custom/ssc.htmleditor/ConstituentHTMLDemoEditDataForm.html"/>
+      </WebUI>
+    </WebUIComponent>
+  </FormMetaData>
+</EditDataFormTemplateSpec>
